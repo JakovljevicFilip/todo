@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use App\Models\Task;
+use App\Models\Task\Status;
+use App\Models\Task\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -12,6 +13,7 @@ use Tests\TestCase;
 class TaskTest extends TestCase
 {
     use RefreshDatabase;
+    private Status $status = Status::SCHEDULED;
 
     public function test_task_creation(): void
     {
@@ -20,13 +22,13 @@ class TaskTest extends TestCase
             'title' => 'Sample Task',
             'description' => 'This is a sample description',
             'scheduled' => now()->addDay(),
-            'status' => 'pending',
+            'status' => $this->status,
         ]);
 
         $this->assertDatabaseHas('tasks', [
             'id' => $task->id,
             'title' => 'Sample Task',
-            'status' => 'pending',
+            'status' => $this->status,
         ]);
     }
 
@@ -35,13 +37,13 @@ class TaskTest extends TestCase
         $task = Task::create([
             'id' => (string) Str::uuid(),
             'title' => 'Another Task',
-            'status' => 'completed',
+            'status' => $this->status,
         ]);
 
         $this->assertDatabaseHas('tasks', [
             'id' => $task->id,
             'title' => 'Another Task',
-            'status' => 'completed',
+            'status' => $this->status,
             'description' => null,
             'scheduled' => null,
         ]);

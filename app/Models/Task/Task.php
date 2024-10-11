@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Task;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,11 +20,11 @@ class Task extends Model
         'title',
         'description',
         'scheduled',
-        'status',
     ];
 
     protected $casts = [
         'scheduled' => 'date',
+        'status' => Status::class,
     ];
 
     protected static function boot(): void
@@ -35,6 +35,8 @@ class Task extends Model
             if (empty($model->id)) {
                 $model->id = (string) Str::uuid();
             }
+
+            $model->status = Status::SCHEDULED;
         });
     }
 }
