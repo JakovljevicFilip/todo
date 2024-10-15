@@ -21,6 +21,7 @@ class Task extends Model
         'title',
         'description',
         'scheduled',
+        'status'
     ];
 
     protected $casts = [
@@ -47,5 +48,4 @@ class Task extends Model
     {
         return TaskFactory::new();
     }
-
 }
