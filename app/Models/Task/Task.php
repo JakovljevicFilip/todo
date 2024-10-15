@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Task;
 
+use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
@@ -36,7 +37,15 @@ class Task extends Model
                 $model->id = (string) Str::uuid();
             }
 
-            $model->status = Status::SCHEDULED;
+            if (empty($model->status)) {
+                $model->status = Status::SCHEDULED;
+            }
         });
     }
+
+    public static function newFactory()
+    {
+        return TaskFactory::new();
+    }
+
 }
