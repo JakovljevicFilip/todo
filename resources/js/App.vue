@@ -1,12 +1,13 @@
-<script setup>
-import Counter from './components/Counter.vue';
-</script>
-
 <template>
-    <h1 class="text-center">Hello World!</h1>
-    <Counter />
+    <Listing/>
 </template>
 
-<style scoped>
-/* Add any styles if needed */
-</style>
+<script lang="ts">
+import Listing  from './components/Task/Listing.vue';
+
+export default {
+    components: {
+        Listing,
+    },
+};
+</script>
