@@ -3,10 +3,13 @@
 namespace Feature\Task;
 
 use App\Models\Task\Task;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ViewTaskTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_task_view(): void
     {
         $task = Task::factory()->scheduled()->create();

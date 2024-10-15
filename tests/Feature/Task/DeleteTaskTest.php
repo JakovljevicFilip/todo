@@ -3,10 +3,13 @@
 namespace Feature\Task;
 
 use App\Models\Task\Task;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteTaskTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_complete_task_cannot_be_deleted(): void
     {
         $task = Task::factory()->completed()->create();
