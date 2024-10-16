@@ -7,9 +7,9 @@
 </template>
 <script lang="ts" setup>
 import { PropType, defineProps } from 'vue';
-import { Task } from '../../types/Task.js';
-import { completeTask } from '../../services/TaskService';
-import { useTaskStore } from '../../stores/TaskStore';
+import { Task } from '../../../types/Task.js';
+import { completeTask } from '../../../services/TaskService';
+import { useTaskStore } from '../../../stores/TaskStore';
 
 const props = defineProps({
     task: {

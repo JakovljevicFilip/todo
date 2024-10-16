@@ -8,8 +8,8 @@
 
 <script lang="ts" setup>
 import { defineProps, PropType } from 'vue';
-import { Task } from '../../types/Task';
-import { fetchTask } from '../../services/TaskService';
+import { Task } from '../../../types/Task';
+import { fetchTask } from '../../../services/TaskService';
 import { useTaskStore } from '@/stores/TaskStore';
 
 const props = defineProps({

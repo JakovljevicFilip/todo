@@ -7,10 +7,10 @@
 </template>
 <script lang="ts" setup>
 import { PropType, defineProps } from 'vue';
-import { Task } from '../../types/Task.js';
+import { Task } from '../../../types/Task.js';
 import { useQuasar } from 'quasar';
-import { deleteTask } from '../../services/TaskService';
-import { useTaskStore } from '../../stores/TaskStore';
+import { deleteTask } from '../../../services/TaskService';
+import { useTaskStore } from '../../../stores/TaskStore';
 
 const props = defineProps({
     task: {

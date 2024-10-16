@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
-import { Task } from '../../types/Task';
+import { Task } from '../../../types/Task';
 import Delete from './Delete.vue';
 import Change from './Change.vue';
 import Complete from './Complete.vue';
