@@ -48,7 +48,7 @@
 
             <q-card-actions align="right" class="text-primary">
                 <q-btn flat label="Cancel" @click="closeDialog" />
-                <q-btn flat label="Create Task" :disabled="editMode" @click="createTask" />
+                <q-btn flat :label="editMode ? 'Save changes' : 'Create task'" @click="handleConfirmationClick" />
             </q-card-actions>
         </q-card>
     </q-dialog>
@@ -56,7 +56,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import {createTask as createTaskService} from '../../services/TaskService.js';
+import {createTask as createTaskService, changeTask as changeTaskService} from '../../services/TaskService.js';
 import { NewTask } from '../../types/NewTask';
 import { useTaskStore } from '@/stores/TaskStore';
 import { date } from 'quasar';
@@ -94,9 +94,16 @@ const closeDialog = () => {
     taskStore.closeTaskDialog();
 };
 
-const createTask = () => {
+const handleConfirmationClick = () => {
     if (!taskTitle.value) return;
+    if (taskId.value) {
+        changeTask();
+        return;
+    }
+    createTask();
+};
 
+const createTask = () => {
     const newTask = {
         title: taskTitle.value,
         description: taskDescription.value,
@@ -108,6 +115,21 @@ const createTask = () => {
         taskStore.addTask(newTask);
         closeDialog();
     });
+};
+
+const changeTask = () => {
+    const task = {
+        id: taskId.value,
+        title: taskTitle.value,
+        description: taskDescription.value,
+        scheduled: taskDate.value,
+    } as Task;
+
+    changeTaskService(task)
+        .then(() => {
+            taskStore.changeTask(task);
+            closeDialog();
+        });
 };
 
 const setupDialog = () => {

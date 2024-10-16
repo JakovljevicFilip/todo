@@ -20,6 +20,10 @@ export const useTaskStore = defineStore('taskStore', {
         setTasks(newTasks: Task[]) {
             this.tasks = newTasks;
         },
+        changeTask(task: Task) {
+            const index = this.tasks.findIndex((oldTask: Task) => oldTask.id === task.id);
+            this.tasks[index] = task;
+        },
         openTaskDialog() {
             this.taskDialog = true;
         },
