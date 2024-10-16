@@ -2,8 +2,14 @@
     <q-btn
         @click="viewTask"
         color="primary"
-        label="Change"
-    />
+        icon="edit"
+        round
+        size="lg"
+    >
+        <q-tooltip>
+            Change Task
+        </q-tooltip>
+    </q-btn>
 </template>
 
 <script lang="ts" setup>

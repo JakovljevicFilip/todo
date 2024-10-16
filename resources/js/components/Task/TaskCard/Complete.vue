@@ -1,9 +1,15 @@
 <template>
     <q-btn
-        label="Complete"
-        color="positive"
         @click="complete"
-    />
+        icon="check"
+        round
+        color="positive"
+        size="lg"
+    >
+        <q-tooltip>
+            Complete Task
+        </q-tooltip>
+    </q-btn>
 </template>
 <script lang="ts" setup>
 import { PropType, defineProps } from 'vue';

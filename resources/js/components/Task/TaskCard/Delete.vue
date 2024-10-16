@@ -1,9 +1,15 @@
 <template>
     <q-btn
-        label="Delete"
-        color="negative"
         @click="confirm"
-    />
+        icon="delete"
+        round
+        color="negative"
+        size="lg"
+    >
+        <q-tooltip>
+            Remove Task
+        </q-tooltip>
+    </q-btn>
 </template>
 <script lang="ts" setup>
 import { PropType, defineProps } from 'vue';
