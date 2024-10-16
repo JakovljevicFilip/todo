@@ -21,3 +21,8 @@ export const changeTask = async (task: Task): Promise<string> => {
     const response = await axios.post(`/api/tasks/${task.id}`, task);
     return response.data;
 };
+
+export const deleteTask = async (task: Task): Promise<string> => {
+    const response = await axios.post(`/api/tasks/${task.id}/delete`, task);
+    return response.data;
+};

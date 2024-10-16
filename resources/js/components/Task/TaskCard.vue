@@ -15,6 +15,7 @@
 
         <q-card-actions>
             <Change :task="task" />
+            <Delete :task="task" />
         </q-card-actions>
     </q-card>
 </template>
@@ -22,6 +23,7 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
 import { Task } from '../../types/Task';
+import Delete from './Delete.vue';
 import Change from './Change.vue';
 
 const props = defineProps({
