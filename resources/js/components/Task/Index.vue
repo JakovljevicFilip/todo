@@ -1,7 +1,10 @@
 <template>
     <div>
-        <h1 class="text-center">Task List</h1>
+        <h1 class="text-center q-mb-sm">Task List</h1>
         <div class="q-pa-md row q-col-gutter-md">
+            <div class="col-12 row justify-center q-mb-md">
+                <Navigation/>
+            </div>
             <div
                 v-for="task in tasks"
                 :key="task.id"
@@ -12,6 +15,7 @@
                 />
             </div>
         </div>
+<!--        TODO: Move messages into separate component.-->
         <p v-if="error">{{ error }}</p>
         <p v-if="loading">Loading...</p>
     </div>
@@ -19,9 +23,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { fetchTasks } from '@/services/task';
+import { fetchTasks } from '@/services/TaskService';
 import TaskCard from './TaskCard.vue';
-import { Task } from '../../types/task';
+import { Task } from '../../types/Task';
+import Navigation from './Navigation.vue';
 
 const tasks = ref<Task[]>([]);
 const loading = ref<boolean>(true);

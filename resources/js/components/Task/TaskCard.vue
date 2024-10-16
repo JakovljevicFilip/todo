@@ -1,3 +1,18 @@
+<template>
+    <q-card>
+        <q-card-section>
+            <div class="text-h6">{{ task.title }}</div>
+            <div class="text-subtitle2"><q-icon name="schedule"/>: {{ formattedScheduledDate }}</div>
+        </q-card-section>
+
+        <q-separator inset />
+
+        <q-card-section>
+            {{ task.description }}
+        </q-card-section>
+    </q-card>
+</template>
+
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
 import { Task } from '../../types/task.js';
@@ -20,21 +35,6 @@ const formattedScheduledDate = computed(() => {
 });
 
 </script>
-
-<template>
-      <q-card>
-        <q-card-section>
-            <div class="text-h6">{{ task.title }}</div>
-            <div class="text-subtitle2"><q-icon name="schedule"/>: {{ formattedScheduledDate }}</div>
-        </q-card-section>
-
-        <q-separator inset />
-
-        <q-card-section>
-          {{ task.description }}
-        </q-card-section>
-      </q-card>
-</template>
 
 <style scoped>
 
