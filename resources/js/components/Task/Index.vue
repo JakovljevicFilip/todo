@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue';
 import { fetchTasks } from '@/services/TaskService';
-import TaskCard from './TaskCard.vue';
+import TaskCard from './TaskCard/TaskCard.vue';
 import Navigation from './Navigation.vue';
 import { useTaskStore } from '@/stores/TaskStore';
 

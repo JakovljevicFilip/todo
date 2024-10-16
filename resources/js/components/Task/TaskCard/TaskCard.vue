@@ -1,6 +1,8 @@
 <template>
     <q-card
         class="relative-position"
+        @mouseenter="displayActionButtons=true"
+        @mouseleave="displayActionButtons=false"
     >
         <q-card-section>
             <div class="text-h6">{{ task.title }}</div>
@@ -13,16 +15,16 @@
             {{ task.description }}
         </q-card-section>
 
-        <q-card-actions>
-            <Complete :task="task"/>
-            <Change :task="task" />
-            <Delete :task="task" />
+        <q-card-actions v-if="displayActionButtons" class="row">
+            <Complete class="col" :task="task"/>
+            <Change class="col" :task="task" />
+            <Delete class="col" :task="task" />
         </q-card-actions>
     </q-card>
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
+import { computed, PropType, ref } from 'vue';
 import { Task } from '../../../types/Task';
 import Delete from './Delete.vue';
 import Change from './Change.vue';
@@ -34,6 +36,8 @@ const props = defineProps({
         required: true,
     },
 });
+
+const displayActionButtons = ref(false);
 
 const formattedScheduledDate = computed(() => {
     if (!props.task.scheduled) return 'Not set.';
