@@ -31,3 +31,8 @@ export const completeTask = async (task: Task): Promise<string> => {
     const response = await axios.post(`/api/tasks/${task.id}/complete`, task);
     return response.data;
 };
+
+export const fetchCompletedTasks = async (): Promise<Task> => {
+    const response = await axios.get('/api/tasks/completed');
+    return response.data;
+};

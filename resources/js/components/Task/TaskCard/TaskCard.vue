@@ -15,10 +15,11 @@
             {{ task.description }}
         </q-card-section>
 
-        <q-card-actions v-if="displayActionButtons" class="absolute-top-right column justify-center">
+        <q-card-actions v-if="displayActionButtons && task.status !== 'completed'" class="absolute-top-right column justify-center">
             <Complete class="col q-mt-sm q-ml-sm" :task="task"/>
             <Change class="col q-mt-sm" :task="task" />
             <Delete class="col q-mt-sm" :task="task" />
+            {{task.status}}
         </q-card-actions>
     </q-card>
 </template>

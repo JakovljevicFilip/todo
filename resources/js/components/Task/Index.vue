@@ -2,7 +2,7 @@
     <div>
         <h1 class="text-center q-mb-sm">Task List</h1>
         <div class="q-pa-md row q-col-gutter-md">
-            <div class="col-12 row justify-center q-mb-md">
+            <div class="col-12">
                 <Navigation/>
             </div>
             <div
@@ -25,7 +25,7 @@
 import { computed, ref, onMounted } from 'vue';
 import { fetchTasks } from '@/services/TaskService';
 import TaskCard from './TaskCard/TaskCard.vue';
-import Navigation from './Navigation.vue';
+import Navigation from './Navigation/Navigation.vue';
 import { useTaskStore } from '@/stores/TaskStore';
 
 const taskStore = useTaskStore();
