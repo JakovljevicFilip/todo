@@ -6,38 +6,40 @@
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-                <q-input
-                    dense
-                    v-model="taskTitle"
-                    label="Task Title"
-                    autofocus
-                    @keyup.enter="createTask"
-                    :rules="[val => !!val || 'Title is required']"
-                />
-
-                <q-input
-                    dense
-                    v-model="taskDescription"
-                    label="Description"
-                    type="textarea"
-                    autogrow
-                />
-
-                <q-toggle
-                    v-model="toggleDate"
-                    color="green"
-                    label="Schedule task?"
-                    class="q-mt-sm"
-                    @click="handleToggleDate"
-                />
-
-                <div v-if="toggleDate" class="q-pt-md text-center">
-                    <q-date
-                        v-model="taskDate"
-                        minimal
-                        :options="dateOptions"
+                <q-form ref="taskForm">
+                    <q-input
+                        dense
+                        v-model="taskTitle"
+                        label="Task Title"
+                        autofocus
+                        :rules="[val => !!val || 'Title is required']"
                     />
-                </div>
+
+                    <q-input
+                        dense
+                        v-model="taskDescription"
+                        label="Description"
+                        type="textarea"
+                        autogrow
+                    />
+
+                    <q-toggle
+                        v-model="toggleDate"
+                        color="green"
+                        label="Schedule task?"
+                        class="q-mt-sm"
+                        @click="handleToggleDate"
+                    />
+
+                    <div v-if="toggleDate" class="q-pt-md text-center">
+                        <q-date
+                            v-model="taskDate"
+                            minimal
+                            :options="dateOptions"
+                            :rules="[val => !!val || 'Date is missing.']"
+                        />
+                    </div>
+                </q-form>
             </q-card-section>
 
             <q-card-actions align="right" class="text-primary">
@@ -59,19 +61,21 @@ const taskStore = useTaskStore();
 
 const editMode = ref(false);
 
-const toggleDate = ref(false);
+const today = date.formatDate(new Date(), 'YYYY/MM/DD');
+const dateOptions = (date) => {
+    return date >= today;
+};
+
+const toggleDate = ref(true);
 const handleToggleDate = () => {
     if (toggleDate.value) {
         taskDate.value = today;
         return;
     }
-    taskDate.value = null;
+    taskDate.value = today;
 }
 
-const today = date.formatDate(new Date(), 'YYYY/MM/DD');
-const dateOptions = (date) => {
-    return date >= today;
-};
+const taskForm = ref(null);
 
 const taskId = ref('');
 const taskTitle = ref('');
@@ -88,13 +92,18 @@ const closeDialog = () => {
     taskStore.closeTaskDialog();
 };
 
-const handleConfirmationClick = () => {
-    if (!taskTitle.value) return;
-    if (taskId.value) {
-        changeTask();
-        return;
+const handleConfirmationClick = async () => {
+    const validation = await taskForm.value.validate();
+    if (validation) {
+        if (toggleDate.value && taskDate.value === null) {
+            toggleDate.value = false;
+        }
+        if (taskId.value) {
+            changeTask();
+            return;
+        }
+        createTask();
     }
-    createTask();
 };
 
 const createTask = () => {
