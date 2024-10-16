@@ -1,13 +1,21 @@
 <template>
-    <Listing/>
+    <div id="container">
+        <TaskIndex/>
+    </div>
 </template>
 
 <script lang="ts">
-import Listing  from './components/Task/Listing.vue';
+import TaskIndex from './components/Task/Index.vue';
 
 export default {
     components: {
-        Listing,
+        TaskIndex,
     },
 };
 </script>
+
+<style>
+#container {
+    min-width: 450px;
+}
+</style>
