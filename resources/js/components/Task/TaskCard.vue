@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
-import { Task } from '../../types/task.js';
+import { Task } from '../../types/Task';
 
 const props = defineProps({
     task: {
