@@ -22,19 +22,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { fetchTasks } from '@/services/TaskService';
 import TaskCard from './TaskCard.vue';
-import { Task } from '../../types/Task';
 import Navigation from './Navigation.vue';
+import { useTaskStore } from '@/stores/TaskStore';
 
-const tasks = ref<Task[]>([]);
+const taskStore = useTaskStore();
+
+const tasks = computed(() => taskStore.tasks);
 const loading = ref<boolean>(true);
 const error = ref<string | null>(null);
 
 onMounted(async () => {
     try {
-        tasks.value = await fetchTasks();
+        const tasks = await fetchTasks();
+        taskStore.setTasks(tasks);
     } catch (err) {
         error.value = 'Failed to fetch tasks';
     } finally {
