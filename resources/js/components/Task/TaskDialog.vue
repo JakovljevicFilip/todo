@@ -1,5 +1,5 @@
 <template>
-    <q-dialog v-model="taskStore.taskDialog" persistent>
+    <q-dialog v-model="taskStore.taskDialog" persistent @before-show="setupDialog">
         <q-card style="min-width: 350px">
             <q-card-section>
                 <div class="text-h6">Create New Task</div>
@@ -31,7 +31,7 @@
                     @click="handleToggleDate"
                 />
 
-                <q-input v-if="toggleDate" filled v-model="taskDate" mask="date">
+                <q-input v-if="toggleDate" filled v-model="taskDate" mask="date" :rules="[val => !!val || 'Date is required']">
                     <template v-slot:append>
                         <q-icon name="event" class="cursor-pointer">
                             <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -48,7 +48,7 @@
 
             <q-card-actions align="right" class="text-primary">
                 <q-btn flat label="Cancel" @click="closeDialog" />
-                <q-btn flat label="Create Task" @click="createTask" />
+                <q-btn flat label="Create Task" :disabled="editMode" @click="createTask" />
             </q-card-actions>
         </q-card>
     </q-dialog>
@@ -62,6 +62,8 @@ import { useTaskStore } from '@/stores/TaskStore';
 import { date } from 'quasar';
 
 const taskStore = useTaskStore();
+
+const editMode = ref(false);
 
 const toggleDate = ref(false);
 const handleToggleDate = () => {
@@ -77,11 +79,18 @@ const dateOptions = (date) => {
     return date >= today;
 };
 
+const taskId = ref('');
 const taskTitle = ref('');
 const taskDescription = ref('');
 const taskDate = ref(today);
 
 const closeDialog = () => {
+    taskId.value = '';
+    taskTitle.value = '';
+    taskDescription.value = '';
+    taskDate.value = '';
+    editMode.value = false;
+    taskStore.clearTask();
     taskStore.closeTaskDialog();
 };
 
@@ -100,6 +109,19 @@ const createTask = () => {
         closeDialog();
     });
 };
+
+const setupDialog = () => {
+    const task = taskStore.task;
+    if (task.id) {
+        taskId.value = task.id;
+        taskTitle.value = task.title;
+        taskDescription.value = task.description;
+        taskDate.value = task.scheduled;
+        toggleDate.value = !!task.scheduled;
+        editMode.value = true;
+    }
+}
+
 </script>
 
 <style scoped>

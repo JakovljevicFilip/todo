@@ -1,5 +1,5 @@
 <template>
-    <q-card>
+    <q-card @click="viewTask">
         <q-card-section>
             <div class="text-h6">{{ task.title }}</div>
             <div class="text-subtitle2"><q-icon name="schedule"/>: {{ formattedScheduledDate }}</div>
@@ -16,6 +16,8 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
 import { Task } from '../../types/Task';
+import { useTaskStore } from '@/stores/TaskStore';
+import { fetchTask } from '../../services/TaskService';
 
 const props = defineProps({
     task: {
@@ -23,6 +25,7 @@ const props = defineProps({
         required: true,
     },
 });
+const taskStore = useTaskStore();
 
 const formattedScheduledDate = computed(() => {
     if (!props.task.scheduled) return 'Not set.';
@@ -33,6 +36,12 @@ const formattedScheduledDate = computed(() => {
         year: 'numeric',
     }).format(date);
 });
+
+const viewTask = async () => {
+    const task = await fetchTask(props.task.id);
+    taskStore.setTask(task);
+    taskStore.openTaskDialog();
+}
 
 </script>
 

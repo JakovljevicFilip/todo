@@ -3,10 +3,17 @@ import { Task } from '../types/Task';
 
 export const useTaskStore = defineStore('taskStore', {
     state: () => ({
+        task: {} as Task,
         tasks: [] as Task[],
         taskDialog: false,
     }),
     actions: {
+        setTask(task: Task)  {
+            this.task = task;
+        },
+        clearTask()  {
+            this.task = {};
+        },
         addTask(newTask: Task) {
             this.tasks.unshift(newTask);
         },
