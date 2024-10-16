@@ -29,7 +29,7 @@ const confirm = () => {
         cancel: true,
     }).onOk(async () => {
         await deleteTask(props.task);
-        taskStore.deleteTask(props.task);
+        taskStore.removeTask(props.task);
     });
 }
 </script>

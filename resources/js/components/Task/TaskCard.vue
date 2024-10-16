@@ -14,6 +14,7 @@
         </q-card-section>
 
         <q-card-actions>
+            <Complete :task="task"/>
             <Change :task="task" />
             <Delete :task="task" />
         </q-card-actions>
@@ -25,6 +26,7 @@ import { computed, PropType } from 'vue';
 import { Task } from '../../types/Task';
 import Delete from './Delete.vue';
 import Change from './Change.vue';
+import Complete from './Complete.vue';
 
 const props = defineProps({
     task: {

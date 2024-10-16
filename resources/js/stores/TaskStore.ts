@@ -24,7 +24,7 @@ export const useTaskStore = defineStore('taskStore', {
             const index = this.tasks.findIndex((oldTask: Task) => oldTask.id === task.id);
             this.tasks[index] = task;
         },
-        deleteTask(task: Task) {
+        removeTask(task: Task) {
             const index = this.tasks.findIndex(existingTask => existingTask.id === task.id);
             this.tasks.splice(index, 1);
         },
