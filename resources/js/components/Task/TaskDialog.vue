@@ -31,19 +31,13 @@
                     @click="handleToggleDate"
                 />
 
-                <q-input v-if="toggleDate" filled v-model="taskDate" mask="date" :rules="[val => !!val || 'Date is required']">
-                    <template v-slot:append>
-                        <q-icon name="event" class="cursor-pointer">
-                            <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                                <q-date v-model="taskDate" :options="dateOptions">
-                                    <div class="row items-center justify-end">
-                                        <q-btn v-close-popup label="Close" color="primary" flat />
-                                    </div>
-                                </q-date>
-                            </q-popup-proxy>
-                        </q-icon>
-                    </template>
-                </q-input>
+                <div v-if="toggleDate" class="q-pt-md text-center">
+                    <q-date
+                        v-model="taskDate"
+                        minimal
+                        :options="dateOptions"
+                    />
+                </div>
             </q-card-section>
 
             <q-card-actions align="right" class="text-primary">
@@ -74,7 +68,7 @@ const handleToggleDate = () => {
     taskDate.value = null;
 }
 
-const today = date.formatDate(new Date(), 'YYYY-MM-DD');
+const today = date.formatDate(new Date(), 'YYYY/MM/DD');
 const dateOptions = (date) => {
     return date >= today;
 };
