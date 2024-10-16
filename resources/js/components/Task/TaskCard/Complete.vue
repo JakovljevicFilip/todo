@@ -7,7 +7,7 @@
         size="lg"
     >
         <q-tooltip>
-            Complete Task
+            Complete
         </q-tooltip>
     </q-btn>
 </template>

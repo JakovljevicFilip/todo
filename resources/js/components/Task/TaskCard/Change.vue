@@ -7,7 +7,7 @@
         size="lg"
     >
         <q-tooltip>
-            Change Task
+            Change
         </q-tooltip>
     </q-btn>
 </template>

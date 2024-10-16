@@ -111,8 +111,11 @@ const createTask = () => {
     } as NewTask;
 
     createTaskService(newTask)
-    .then(() => {
-        taskStore.addTask(newTask);
+    .then((response) => {
+        taskStore.addTask({
+            ...newTask,
+            id: response.id
+        } as Task);
         closeDialog();
     });
 };

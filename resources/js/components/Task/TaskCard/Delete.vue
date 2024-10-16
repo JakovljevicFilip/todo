@@ -7,7 +7,7 @@
         size="lg"
     >
         <q-tooltip>
-            Remove Task
+            Remove
         </q-tooltip>
     </q-btn>
 </template>
