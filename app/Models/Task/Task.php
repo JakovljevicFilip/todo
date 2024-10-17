@@ -39,7 +39,10 @@ class Task extends Model
             }
 
             if (empty($model->status)) {
-                $model->status = Status::SCHEDULED;
+                if ($model->scheduled)
+                    $model->status = Status::SCHEDULED;
+                else
+                    $model->status = Status::IN_PROGRESS;
             }
         });
     }
