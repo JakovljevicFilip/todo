@@ -33,21 +33,31 @@ docker run --rm \
 ### 3. Install Backend Dependencies (Laravel)
 Laravel Sail uses Docker, so you don't need to install PHP or MySQL locally.
 
-#### Step 1: Install Laravel dependencies via Docker:
-```bash
-./vendor/bin/sail up -d
-./vendor/bin/sail composer install
-```
-
-#### Step 2: Create a .env file:
+#### Step 1: Create a .env file:
 Copy the .env.example file to .env:
 ```bash
 cp .env.example .env
 ```
 
+#### Step 2: Install Laravel dependencies via Docker:
+```bash
+./vendor/bin/sail up -d
+./vendor/bin/sail composer install
+```
+
 #### Step 3: Generate the application key:
 ```bash
 ./vendor/bin/sail artisan key:generate
+```
+
+#### Step 4: Run migrations:
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+#### Step 5: Seed database (optional):
+```bash
+./vendor/bin/sail artisan db:seed
 ```
 
 ### 3. Set Up Frontend (Vue 3)
