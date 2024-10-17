@@ -16,7 +16,7 @@ Clone this repository to your local machine:
 
 ```bash
 git clone https://github.com/JakovljevicFilip/todo.git
-chmod -R todo 777 #Optional
+chmod -R 777 todo #Optional
 cd todo
 ```
 
