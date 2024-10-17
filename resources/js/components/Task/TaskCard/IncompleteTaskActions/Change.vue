@@ -13,22 +13,16 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, PropType } from 'vue';
-import { Task } from '../../../types/Task';
-import { fetchTask } from '../../../services/TaskService';
+import { inject } from 'vue';
+import { fetchTask } from '../../../../services/TaskService';
 import { useTaskStore } from '@/stores/TaskStore';
 
-const props = defineProps({
-    task: {
-        type: Object as PropType<Task>,
-        required: true,
-    },
-});
+const originalTask = inject('task');
 
 const taskStore = useTaskStore();
 
 const viewTask = async () => {
-    const task = await fetchTask(props.task.id);
+    const task = await fetchTask(originalTask.value.id);
     taskStore.setTask(task);
     taskStore.openTaskDialog();
 }

@@ -36,3 +36,8 @@ export const fetchCompletedTasks = async (): Promise<Task> => {
     const response = await axios.get('/api/tasks/completed');
     return response.data;
 };
+
+export const revertTask = async (task: Task): Promise<string> => {
+    const response = await axios.post(`/api/tasks/${task.id}/revert`, task);
+    return response.data;
+};
