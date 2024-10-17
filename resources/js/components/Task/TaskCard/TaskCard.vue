@@ -17,20 +17,23 @@
             </p>
         </q-card-section>
 
-        <q-card-actions v-if="displayActionButtons && task.status !== 'completed'" class="absolute-top-right column justify-center">
-            <Complete class="col q-mt-sm q-ml-sm" :task="task"/>
-            <Change class="col q-mt-sm" :task="task" />
-            <Delete class="col q-mt-sm" :task="task" />
+        <q-card-actions
+            v-if="displayActionButtons"
+            :key="rerenderCardActionsKey"
+            class="absolute-top-right column justify-center"
+        >
+            <IncompleteTaskActions v-if="task.status !== TaskStatus.Completed"/>
+            <CompleteTaskActions v-if="task.status === TaskStatus.Completed"/>
         </q-card-actions>
     </q-card>
 </template>
 
 <script setup lang="ts">
-import { computed, PropType, ref } from 'vue';
+import { computed, PropType, provide, ref, watch } from 'vue';
 import { Task } from '../../../types/Task';
-import Delete from './Delete.vue';
-import Change from './Change.vue';
-import Complete from './Complete.vue';
+import IncompleteTaskActions from './IncompleteTaskActions/IncompleteTaskActions.vue';
+import { TaskStatus } from '../../../types/Status';
+import CompleteTaskActions from './CompleteTaskActions/CompleteTaskActions.vue';
 
 const props = defineProps({
     task: {
@@ -38,6 +41,8 @@ const props = defineProps({
         required: true,
     },
 });
+const reactiveTask = ref(props.task)
+provide('task', reactiveTask);
 
 const displayActionButtons = ref(false);
 
@@ -50,6 +55,12 @@ const formattedScheduledDate = computed(() => {
         year: 'numeric',
     }).format(date);
 });
+
+const rerenderCardActionsKey = ref(0);
+watch(() => props.task, (newTask) => {
+    reactiveTask.value = newTask
+    rerenderCardActionsKey.value++;
+}, { deep: true });
 
 </script>
 
