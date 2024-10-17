@@ -59,7 +59,7 @@ class CreateTaskTest extends TestCase
         ]);
     }
 
-    public function test_created_task_should_have_status_scheduled(): void
+    public function test_created_task_with_a_date_should_have_status_scheduled(): void
     {
         $response = $this->postJson(route('tasks.create'), [
             'title' => 'Sample Task',
@@ -70,5 +70,18 @@ class CreateTaskTest extends TestCase
         $task = Task::first();
 
         $this->assertEquals(Status::SCHEDULED, $task->status);
+    }
+
+    public function test_created_task_without_a_date_should_have_status_in_progress(): void
+    {
+        $response = $this->postJson(route('tasks.create'), [
+            'title' => 'Sample Task',
+            'scheduled' => null,
+        ]);
+
+        $response->assertStatus(201);
+        $task = Task::first();
+
+        $this->assertEquals(Status::IN_PROGRESS, $task->status);
     }
 }

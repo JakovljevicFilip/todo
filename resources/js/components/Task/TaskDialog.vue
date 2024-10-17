@@ -72,7 +72,7 @@ const handleToggleDate = () => {
         taskDate.value = today;
         return;
     }
-    taskDate.value = today;
+    taskDate.value = null;
 }
 
 const taskForm = ref(null);
