@@ -1,6 +1,19 @@
-# Laravel Sail + Vue 3 Project
+# Laravel Vue3 Task Management App
 
-This project is built with **Laravel** (backend) and **Vue 3** (frontend), using **Laravel Sail** for Docker-based development. The Vue 3 frontend integrates with Laravel's backend and is powered by Quasar for UI components.
+This project is a task management application built using **Laravel** as the backend framework and **Vue 3** as the frontend framework. It incorporates **Laravel Sail** for Docker-based development, **Quasar** for Vue UI components, and **Pinia** as the state management system. The application supports task creation, listing, updating, and deletion, allowing users to manage tasks effectively.
+
+The backend is responsible for managing tasks through a RESTful API, handling task statuses (scheduled, in-progress, completed), and managing database interactions using **Eloquent ORM**.
+
+The frontend is a **Single Page Application (SPA)** that allows users to interact with the task management system seamlessly, using Vue 3's Composition API and Quasar's rich set of UI components for a responsive and dynamic user experience.
+
+Key features include:
+- **Task management**: Create, update, and delete tasks with dynamic statuses.
+- **Real-time updates**: Seamless interaction between frontend and backend with Axios.
+- **Custom dialogs**: Task creation and update dialogs using Quasar components.
+- **State management**: Task state is managed globally using Pinia.
+- **Docker-based development**: The project utilizes Laravel Sail for a seamless Docker environment, providing services like MySQL, Redis, and phpMyAdmin for local development.
+
+The project is ideal for those looking to build or expand their understanding of full-stack development with Laravel, Vue 3, and Quasar.
 
 ## Prerequisites
 
