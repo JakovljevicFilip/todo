@@ -13,7 +13,9 @@ class ListTaskController extends Controller
 {
     public function list(): JsonResponse
     {
-        $tasks = Task::whereIn('status', [Status::SCHEDULED, Status::IN_PROGRESS])->get();
+        $tasks = Task::whereIn('status', [Status::SCHEDULED, Status::IN_PROGRESS])
+            ->orderBy('updated_at', 'desc')
+            ->get();
         return response()->json($tasks);
     }
 }
