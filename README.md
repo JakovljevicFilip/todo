@@ -16,9 +16,21 @@ Clone this repository to your local machine:
 
 ```bash
 git clone https://github.com/JakovljevicFilip/todo.git
+chmod -R todo 777 #Optional
 cd todo
 ```
-### 2. Install Backend Dependencies (Laravel)
+
+### 2. Install required composer dependencies via Docker
+```bash
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
+### 3. Install Backend Dependencies (Laravel)
 Laravel Sail uses Docker, so you don't need to install PHP or MySQL locally.
 
 #### Step 1: Install Laravel dependencies via Docker:
@@ -34,7 +46,6 @@ cp .env.example .env
 ```
 
 #### Step 3: Generate the application key:
-Copy the .env.example file to .env:
 ```bash
 ./vendor/bin/sail artisan key:generate
 ```
