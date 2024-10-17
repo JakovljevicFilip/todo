@@ -144,7 +144,7 @@ const setupDialog = () => {
         taskId.value = task.id;
         taskTitle.value = task.title;
         taskDescription.value = task.description;
-        taskDate.value = task.scheduled;
+        taskDate.value = task.scheduled ? date.formatDate(task.scheduled, 'YYYY/MM/DD') : null;
         toggleDate.value = !!task.scheduled;
         editMode.value = true;
     }
